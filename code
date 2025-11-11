@@ -1,0 +1,83 @@
+import requests
+import json
+# --- Configuration ---
+JOB_ID = "YOUR JOB ID"
+API_TOKEN = "YOUR TEAMTAILOR API" # Your Teamtailor API Token
+BASE_URL = "https://api.teamtailor.com"
+API_VERSION = "20240404"
+# The endpoint to list job applications
+initial_url = f"{BASE_URL}/v1/job-applications"
+# Headers for Authentication and API Version
+headers = {
+    "Authorization": f"Token token={API_TOKEN}",
+    "X-Api-Version": API_VERSION,
+    "Content-Type": "application/vnd.api+json"
+}
+# Query parameters for filtering by Job ID and including Candidate data
+# You can optionally increase the page size here (e.g., page[size]=50) to reduce API calls
+initial_params = {
+    "filter[job]": JOB_ID,
+    "include": "candidate",
+    "page[size]": 30  # Set a larger page size to fetch more per request
+}
+print(f"Fetching candidates for Job ID: {JOB_ID}...")
+# --- Pagination Setup ---
+current_url = initial_url
+current_params = initial_params
+all_candidates = []
+all_job_applications = []
+sourced_candidates = []
+page_count = 0
+# --- Send requests until no 'next' link is found ---
+while current_url:
+    page_count += 1
+    print(f"-> Fetching Page {page_count}...")
+    # Send the GET request
+    # Only use 'params' for the first request; subsequent requests use the full 'next' URL
+    if page_count == 1:
+        response = requests.get(current_url, headers=headers, params=current_params)
+    else:
+        # Subsequent requests use the full URL from the 'next' link (which already contains parameters)
+        response = requests.get(current_url, headers=headers)
+    # --- Process the response ---
+    if response.status_code != 200:
+        print(f"\nAPI Request Failed at Page {page_count}. Status Code: {response.status_code}")
+        try:
+            print(json.dumps(response.json(), indent=3))
+        except:
+            print(f"Raw response: {response.text}")
+        break
+    try:
+        response_data = response.json()
+    except json.JSONDecodeError:
+        print(f"Error: Failed to decode JSON response on Page {page_count}. Raw response: {response.text}")
+        break
+    # 1. Collect Job Applications
+    all_job_applications.extend(response_data.get('data', []))
+    # 2. Collect Candidate details from the 'included' array
+    included_items = response_data.get('included', [])
+    candidates_on_page = [item for item in included_items if item.get('type') == 'candidates']
+    sourced_candidates_on_page = [item for item in included_items if item.get('type') == 'candidates' and item.get('attributes', {}).get('sourced', {}) == True]
+    all_candidates.extend(candidates_on_page)
+    sourced_candidates.extend(sourced_candidates_on_page)
+    # 3. Check for the next page link
+    links = response_data.get('links', {})
+    next_link = links.get('next')
+    # Update the current_url for the next iteration
+    if next_link:
+        current_url = next_link
+    else:
+        # Exit the loop if there is no next page
+        current_url = None
+# --- Final Summary ---
+print("\n" + "="*40)
+print("PAGINATION COMPLETE")
+print(f"Total pages fetched: {page_count}")
+print(f"Total Job Applications found: {len(all_job_applications)}")
+print(f"Total unique Candidates retrieved: {len(all_candidates)}, whereby {len(sourced_candidates)} are sourced candidates.")
+print("="*40)
+for i in range(10):
+    print(f"Sourced Candidate example {i+1}:", sourced_candidates[i])
+
+# The 'all_candidates' list now holds the data for all candidates across all pages.
+# You can now process this list for your final output.
