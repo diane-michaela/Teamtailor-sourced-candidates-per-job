@@ -1,14 +1,19 @@
 # DISCLAIMER — Privacy & Customization# 
+ =============================================================================
+ To preserve privacy, the pipeline stages used in this script ("TA Screening",# "HM Interview", "Testing Stage", "Final Interview", "Offer", "Hired") 
+ reflect a CLASSIC, GENERIC hiring process. They do NOT match the exact stages or# naming conventions used at the author's current company.
+ Before using this script in your own setup, you MUST replace these stage# names with the EXACT names of the stages you have created in your own
+ TeamTailor (or other ATS) pipeline. Stage names are matched as plain strings,# so any mismatch (typos, extra spaces, different casing) will silently result# in a count of 0 for that stage.## Places to update if your stage names differ:
+ - STAGE_ORDER (the master list)
+ - INTERVIEW_STAGES (stages you want to highlight with candidate names)
+ - The funnel and alert sections (display labels)
 =============================================================================
-# 
-To preserve privacy, the pipeline stages used in this script ("TA Screening",# "HM Interview", "Testing Stage", "Final Interview", "Offer", "Hired") reflect# a CLASSIC, GENERIC hiring process. They do NOT match the exact stages or# naming conventions used at the author's current company.## Before using this script in your own setup, you MUST replace these stage# names with the EXACT names of the stages you have created in your own# TeamTailor (or other ATS) pipeline. Stage names are matched as plain strings,# so any mismatch (typos, extra spaces, different casing) will silently result# in a count of 0 for that stage.## Places to update if your stage names differ:# - STAGE_ORDER (the master list)# - INTERVIEW_STAGES (stages you want to highlight with candidate names)# - The funnel and alert sections (display labels)
-# =============================================================================
 
-# Teamtailor Hiring Report — Make Automation
+Teamtailor Hiring Report — Make Automation
 
-Automated weekly hiring pipeline reports pulled from the Teamtailor ATS and posted to Slack, powered by Make (formerly Integromat).
+# Automated weekly hiring pipeline reports pulled from the Teamtailor ATS and posted to Slack, powered by Make (formerly Integromat).
 
-# =============================================================================
+=============================================================================
 
 
 ## Purpose
