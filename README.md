@@ -72,7 +72,6 @@ The key saving: the Router fan-out pattern duplicates the heavy Code module for 
 | File | Purpose |
 |---|---|
 | `master-code-teamtailor-extraction.py` | Make Module 2 — full report logic. Copy/paste into Make's Python Code module. Module 1 config is included as a comment at the top. |
-| `teamtailor_hiring_report.py` | Standalone Python version — run locally with env variables, no Make dependency. |
 | `.env.example` | Template for local environment variables. Copy to `.env` and fill in your token. |
 
 ---
