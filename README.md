@@ -54,17 +54,6 @@ Scheduler (weekly)
        Message: {{slack_message}}
 ```
 
-### Why this architecture saves credits
-
-| Old setup | New setup |
-|---|---|
-| Router → 5× Code → 5× Slack | Config → Iterator → 1× Code → 1× Slack |
-| Code module runs 5 times independently | Code module logic runs once per iteration, reused |
-| ~10 operations per run | ~4 modules, scales automatically with job count |
-| Adding a job = duplicating a branch | Adding a job = one line in Module 1 |
-
-The key saving: the Router fan-out pattern duplicates the heavy Code module for every job. The Iterator pattern runs a single module instance per item — fewer operations billed and a much smaller scenario to maintain.
-
 ---
 
 ## Files
