@@ -1,5 +1,6 @@
 # DISCLAIMER — Privacy & Customization# 
  =============================================================================
+ 
  To preserve privacy, the pipeline stages used in this script ("TA Screening",# "HM Interview", "Testing Stage", "Final Interview", "Offer", "Hired") 
  reflect a CLASSIC, GENERIC hiring process. They do NOT match the exact stages or# naming conventions used at the author's current company.
  Before using this script in your own setup, you MUST replace these stage# names with the EXACT names of the stages you have created in your own
