@@ -1,3 +1,5 @@
+# IDEAL IF YOU WANT TO RETRIEVE ONLY ONE JOB
+
 import requests
 import json
 # --- Configuration ---
