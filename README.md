@@ -15,25 +15,6 @@ For each active job opening, this automation:
 
 ---
 
-# DISCLAIMER — Privacy & Customization
-# =============================================================================
-# To preserve privacy, the pipeline stages used in this script ("TA Screening",
-# "HM Interview", "Testing Stage", "Final Interview", "Offer", "Hired") reflect
-# a CLASSIC, GENERIC hiring process. They do NOT match the exact stages or
-# naming conventions used at the author's current company.
-#
-# Before using this script in your own setup, you MUST replace these stage
-# names with the EXACT names of the stages you have created in your own
-# TeamTailor (or other ATS) pipeline. Stage names are matched as plain strings,
-# so any mismatch (typos, extra spaces, different casing) will silently result
-# in a count of 0 for that stage.
-#
-# Places to update if your stage names differ:
-#   - STAGE_ORDER (the master list)
-#   - INTERVIEW_STAGES (stages you want to highlight with candidate names)
-#   - The funnel and alert sections (display labels)
-# =============================================================================
-
 ## Make Architecture
 
 ```
@@ -141,3 +122,21 @@ python teamtailor_hiring_report.py
 - **Authentication:** `Token token=YOUR_TOKEN`
 - **Endpoints used:** `/v1/jobs/{id}`, `/v1/job-applications`
 
+# DISCLAIMER — Privacy & Customization
+# =============================================================================
+# To preserve privacy, the pipeline stages used in this script ("TA Screening",
+# "HM Interview", "Testing Stage", "Final Interview", "Offer", "Hired") reflect
+# a CLASSIC, GENERIC hiring process. They do NOT match the exact stages or
+# naming conventions used at the author's current company.
+#
+# Before using this script in your own setup, you MUST replace these stage
+# names with the EXACT names of the stages you have created in your own
+# TeamTailor (or other ATS) pipeline. Stage names are matched as plain strings,
+# so any mismatch (typos, extra spaces, different casing) will silently result
+# in a count of 0 for that stage.
+#
+# Places to update if your stage names differ:
+#   - STAGE_ORDER (the master list)
+#   - INTERVIEW_STAGES (stages you want to highlight with candidate names)
+#   - The funnel and alert sections (display labels)
+# =============================================================================
